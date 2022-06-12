@@ -6,6 +6,8 @@ from meilisearch.client import Client
 from components.search_bar import search_bar
 from components.search_result import search_result
 
+st.set_page_config(layout="centered")
+
 query, index = search_bar()
 
 client = Client(os.environ["MEILISEARCH_URL"], api_key=os.environ["MEILISEARCH_KEY"])

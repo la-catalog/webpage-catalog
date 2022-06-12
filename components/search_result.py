@@ -1,7 +1,10 @@
 import json
 
+import pandas as pd
 import streamlit as st
 from page_sku import SKU, Measurement, Rating
+
+from utility import stringfy
 
 
 def search_result(result: list) -> None:
@@ -36,7 +39,8 @@ def beautiful_hit(hit: dict) -> None:
         display_images(sku.images)
         display_segments(sku.segments)
         display_rating(sku.rating)
-        display_measurement(sku.measurement)
+        display_measurement(sku.measurement, sku.package)
+        display_weight(sku.measurement, sku.package)
 
     with right_col:
         for field, value in hit.items():
@@ -63,45 +67,58 @@ def display_images(images: list) -> None:
 
 
 def display_segments(segments: list) -> None:
-    if not segments:
-        return
-
-    body = "| segments |\n| --- |"
-
-    for s in segments:
-        body += f"\n| {s} |"
-
-    st.markdown(body=body)
+    if segments:
+        dataframe = pd.DataFrame(data=segments, columns=["segments"])
+        st.table(data=dataframe)
 
 
 def display_rating(rating: Rating) -> None:
-    if not rating.curent:
-        return
-
-    st.slider(
-        label="rating",
-        min_value=rating.min,
-        max_value=rating.max,
-        value=rating.curent,
-        disabled=True,
-    )
+    if rating.curent:
+        st.slider(
+            label="rating",
+            min_value=rating.min,
+            max_value=rating.max,
+            value=rating.curent,
+            disabled=True,
+        )
 
 
-def display_measurement(measurement: Measurement) -> None:
-    body = ""
+def display_measurement(measurement: Measurement, package: Measurement) -> None:
+    measurement.length = 15.0
+    measurement.width = 23.0
+    measurement.height = 20.5
+    measurement.unit = "cm"
 
-    if measurement.length and measurement.unit:
-        body += f"🇨: {measurement.length} {measurement.unit}  \n"
+    dataframe = pd.DataFrame(data=[
+        [
+            stringfy(measurement.length),
+            stringfy(measurement.width),
+            stringfy(measurement.height),
+            stringfy(measurement.unit),
+        ],
+        [
+            stringfy(package.length),
+            stringfy(package.width),
+            stringfy(package.height),
+            stringfy(package.unit),
+        ]
+    ], index=["⚽", "📦"], columns=["🇨", "🇱", "🇦", "📐"])
 
-    if measurement.width and measurement.unit:
-        body += f"🇱: {measurement.width} {measurement.unit}  \n"
+    st.table(data=dataframe)
 
-    if measurement.height and measurement.unit:
-        body += f"🇦: {measurement.height} {measurement.unit}  \n"
+def display_weight(measurement: Measurement, package: Measurement) -> None:
+    dataframe = pd.DataFrame(data=[
+        [
+            stringfy(measurement.weight),
+            stringfy(measurement.weight_unit),
+        ],
+        [
+            stringfy(package.weight),
+            stringfy(package.weight_unit),
+        ]
+    ], index=["⚽", "📦"], columns=["🇵", "⚖️"])
 
-    if measurement.weight and measurement.weight_unit:
-        body += f"⚖️: {measurement.weight} {measurement.weight_unit}  \n"
+    st.table(data=dataframe)
 
-    if body:
-        st.text(body="")
-        st.caption(body=body)
+def display_price():
+    pass
