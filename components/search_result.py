@@ -2,7 +2,7 @@ import json
 
 import pandas as pd
 import streamlit as st
-from page_sku import SKU, Measurement, Rating
+from page_sku import SKU, Attribute, Measurement, Price, Rating
 
 from utility import stringfy
 
@@ -20,7 +20,7 @@ def search_result(result: list) -> None:
         st.text(f"⏱️ time spent: {result['processingTimeMs']}")
 
     for hit in result["hits"]:
-        with st.expander(hit["name"], expanded=True):
+        with st.expander(label=hit["name"], expanded=True):
             match view:
                 case "default":
                     beautiful_hit(hit)
@@ -32,21 +32,28 @@ def search_result(result: list) -> None:
 
 
 def beautiful_hit(hit: dict) -> None:
+    sku = SKU(**hit)
     left_col, right_col = st.columns([2, 2])
 
-    with left_col:
-        sku = SKU(**hit)
-        display_images(sku.images)
-        display_segments(sku.segments)
-        display_rating(sku.rating)
-        display_measurement(sku.measurement, sku.package)
-        display_weight(sku.measurement, sku.package)
-
     with right_col:
-        for field, value in hit.items():
-            if not isinstance(value, (dict, list)):
-                st.caption(body=field)
-                st.code(body=value)
+        display_basic(hit)
+
+    with left_col:
+        display_images(images=sku.images)
+        display_segments(segments=sku.segments)
+        display_rating(rating=sku.rating)
+        display_measurement(measurement=sku.measurement, package=sku.package)
+        display_weight(measurement=sku.measurement, package=sku.package)
+        display_price(prices=sku.prices)
+
+    display_attributes(attributes=sku.attributes, id_=str(sku.id))
+
+
+def display_basic(hit: dict):
+    for field, value in hit.items():
+        if not isinstance(value, (dict, list)):
+            st.caption(body=field)
+            st.code(body=value)
 
 
 def display_images(images: list) -> None:
@@ -84,41 +91,62 @@ def display_rating(rating: Rating) -> None:
 
 
 def display_measurement(measurement: Measurement, package: Measurement) -> None:
-    measurement.length = 15.0
-    measurement.width = 23.0
-    measurement.height = 20.5
-    measurement.unit = "cm"
-
-    dataframe = pd.DataFrame(data=[
-        [
-            stringfy(measurement.length),
-            stringfy(measurement.width),
-            stringfy(measurement.height),
-            stringfy(measurement.unit),
+    dataframe = pd.DataFrame(
+        data=[
+            [
+                stringfy(measurement.length),
+                stringfy(measurement.width),
+                stringfy(measurement.height),
+                stringfy(measurement.unit),
+            ],
+            [
+                stringfy(package.length),
+                stringfy(package.width),
+                stringfy(package.height),
+                stringfy(package.unit),
+            ],
         ],
-        [
-            stringfy(package.length),
-            stringfy(package.width),
-            stringfy(package.height),
-            stringfy(package.unit),
-        ]
-    ], index=["⚽", "📦"], columns=["🇨", "🇱", "🇦", "📐"])
+        index=["⚽", "📦"],
+        columns=["🇨", "🇱", "🇦", "📐"],
+    )
 
     st.table(data=dataframe)
+
 
 def display_weight(measurement: Measurement, package: Measurement) -> None:
-    dataframe = pd.DataFrame(data=[
-        [
-            stringfy(measurement.weight),
-            stringfy(measurement.weight_unit),
+    dataframe = pd.DataFrame(
+        data=[
+            [
+                stringfy(measurement.weight),
+                stringfy(measurement.weight_unit),
+            ],
+            [
+                stringfy(package.weight),
+                stringfy(package.weight_unit),
+            ],
         ],
-        [
-            stringfy(package.weight),
-            stringfy(package.weight_unit),
-        ]
-    ], index=["⚽", "📦"], columns=["🇵", "⚖️"])
+        index=["⚽", "📦"],
+        columns=["🇵", "⚖️"],
+    )
 
     st.table(data=dataframe)
 
-def display_price():
-    pass
+
+def display_price(prices: list[Price]) -> None:
+    dataframe = pd.DataFrame(
+        data=[stringfy(p.amount) for p in prices],
+        columns=["💲"],
+        index=[p.currency for p in prices],
+    )
+    st.table(data=dataframe)
+
+
+def display_attributes(attributes: list[Attribute], id_: str) -> None:
+    if st.checkbox(label="👁️ attributes", key=f"{id_}_attributes"):
+        dataframe = pd.DataFrame(
+            data={
+                "name": [a.name for a in attributes],
+                "value": [a.value for a in attributes],
+            }
+        )
+        st.table(data=dataframe)
