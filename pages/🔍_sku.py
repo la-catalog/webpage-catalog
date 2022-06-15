@@ -19,10 +19,10 @@ from webpage_components import (
 )
 
 
-def display_result(result: list, stopwatch: Stopwatch) -> None:
+def display_result(result: list, duration: Stopwatch) -> None:
     view_mode = search_info_bar(
         results_quantity=result["nbHits"],
-        time_spent=f"{stopwatch}",
+        time_spent=f"{duration}",
     )
 
     for hit in result["hits"]:
