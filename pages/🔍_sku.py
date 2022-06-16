@@ -1,10 +1,13 @@
 import json
 import os
+from datetime import timedelta
 
 import streamlit as st
 from la_stopwatch import Stopwatch
 from meilisearch.client import Client
+from page_infra.options import get_marketplace_infra
 from page_sku import SKU
+from structlog.stdlib import get_logger
 from webpage_components import (
     display_attributes,
     display_basic,
@@ -19,7 +22,7 @@ from webpage_components import (
 )
 
 
-def display_result(result: list, duration: Stopwatch) -> None:
+def display_result(result: list, duration: timedelta) -> None:
     view_mode = search_info_bar(
         results_quantity=result["nbHits"],
         time_spent=f"{duration}",
@@ -88,9 +91,13 @@ query, marketplace = search_bar(
     ]
 )
 
-client = Client(os.environ["MEILISEARCH_URL"], api_key=os.environ["MEILISEARCH_KEY"])
+# Get database information
+infra = get_marketplace_infra(marketplace=marketplace, logger=get_logger())
+catalog = infra.catalog_index
 
+# Execute query
 stopwatch = Stopwatch()
-result = client.index(uid=marketplace).search(query=query)
+client = Client(os.environ["MEILISEARCH_URL"], api_key=os.environ["MEILISEARCH_KEY"])
+result = client.index(uid=catalog).search(query=query)
 
 display_result(result, stopwatch.duration())
