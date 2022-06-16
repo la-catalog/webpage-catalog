@@ -21,6 +21,8 @@ from webpage_components import (
     search_info_bar,
 )
 
+from utility.marketplaces import MARKETPLACES
+
 
 def display_result(result: list, duration: timedelta) -> None:
     view_mode = search_info_bar(
@@ -83,13 +85,7 @@ def beautiful_hit(hit: dict) -> None:
 
 st.set_page_config(layout="wide", page_icon="📗")
 
-query, marketplace = search_bar(
-    marketplaces=[
-        "google_shopping",
-        "mercado_livre",
-        "rihappy",
-    ]
-)
+query, marketplace = search_bar(marketplaces=MARKETPLACES)
 
 # Get database information
 infra = get_marketplace_infra(marketplace=marketplace, logger=get_logger())
