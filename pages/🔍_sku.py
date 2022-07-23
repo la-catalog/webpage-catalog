@@ -6,7 +6,7 @@ import streamlit as st
 from la_stopwatch import Stopwatch
 from meilisearch.client import Client
 from page_infra.options import get_marketplace_infra
-from page_sku import SKU
+from page_models import SKU
 from structlog.stdlib import get_logger
 from webpage_components import (
     display_attributes,
