@@ -8,18 +8,11 @@ from meilisearch.client import Client
 from page_infra.options import get_marketplace_infra
 from page_models import SKU
 from structlog.stdlib import get_logger
-from webpage_components import (
-    display_attributes,
-    display_basic,
-    display_images,
-    display_measurements,
-    display_prices,
-    display_rating,
-    display_segments,
-    display_weight,
-    search_bar,
-    search_info_bar,
-)
+from webpage_components import (display_attributes, display_basic,
+                                display_images, display_measurements,
+                                display_prices, display_rating,
+                                display_segments, display_weight, search_bar,
+                                search_info_bar)
 
 from utility.marketplaces import MARKETPLACES
 
