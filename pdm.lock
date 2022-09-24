@@ -125,6 +125,12 @@ requires_python = "~=3.7"
 summary = "Extensible memoizing collections and decorators"
 
 [[package]]
+name = "camel-converter"
+version = "1.0.6"
+requires_python = ">=3.7,<4.0"
+summary = "Converts a string from snake case to camel case or camel case to snake case"
+
+[[package]]
 name = "certifi"
 version = "2022.6.15"
 requires_python = ">=3.6"
@@ -398,10 +404,11 @@ dependencies = [
 
 [[package]]
 name = "meilisearch"
-version = "0.19.2"
+version = "0.20.0"
 requires_python = ">=3"
 summary = "The python client for Meilisearch API."
 dependencies = [
+    "camel-converter",
     "requests",
 ]
 
@@ -527,7 +534,7 @@ name = "page-infra"
 version = "0.1.0"
 requires_python = ">=3.10"
 git = "https://github.com/la-catalog/page-infra.git"
-revision = "be22b0eb8e5dc897cd2b9add1e10dd955e8d4bc7"
+revision = "82aec902f09768f8f63a4ee15b1437a419a9900d"
 summary = ""
 dependencies = [
     "aio-pika>=8.0.3",
@@ -846,7 +853,7 @@ dependencies = [
 
 [[package]]
 name = "streamlit"
-version = "1.12.2"
+version = "1.13.0"
 requires_python = ">=3.7, !=3.9.7"
 summary = "The fastest way to build data apps in Python"
 dependencies = [
@@ -860,7 +867,7 @@ dependencies = [
     "packaging>=14.1",
     "pandas>=0.21.0",
     "pillow>=6.2.0",
-    "protobuf<4,>=3.12",
+    "protobuf!=3.20.2,<4,>=3.12",
     "pyarrow>=4.0",
     "pydeck>=0.1.dev5",
     "pympler>=0.9",
@@ -1001,7 +1008,7 @@ name = "webpage-components"
 version = "0.1.0"
 requires_python = ">=3.10"
 git = "https://github.com/la-catalog/webpage-components.git"
-revision = "ac7aa236df8eeb0786f22add91763874c1dc941d"
+revision = "79bd5e65c18467c7518bfceae6a1b698a9b9bb3b"
 summary = ""
 dependencies = [
     "streamlit>=1.11.0",
@@ -1142,6 +1149,10 @@ content_hash = "sha256:5855e388fb331494bc45b597f78c00c82a8dc8573bbec0fc768385b21
 "cachetools 5.2.0" = [
     {url = "https://files.pythonhosted.org/packages/68/aa/5fc646cae6e997c3adf3b0a7e257cda75cff21fcba15354dffd67789b7bb/cachetools-5.2.0-py3-none-any.whl", hash = "sha256:f9f17d2aec496a9aa6b76f53e3b614c965223c061982d434d160f930c698a9db"},
     {url = "https://files.pythonhosted.org/packages/c2/6f/278225c5a070a18a76f85db5f1238f66476579fa9b04cda3722331dcc90f/cachetools-5.2.0.tar.gz", hash = "sha256:6a94c6402995a99c3970cc7e4884bb60b4a8639938157eeed436098bf9831757"},
+]
+"camel-converter 1.0.6" = [
+    {url = "https://files.pythonhosted.org/packages/11/5d/0b26018db1d6f60d9cb92a43d7f8452c1104706f01ba4aa558bc7d9ea78c/camel_converter-1.0.6-py3-none-any.whl", hash = "sha256:8e752eb4c73b7cd94c45f74374fb4f6374286c80d60946002db998aae4349766"},
+    {url = "https://files.pythonhosted.org/packages/42/5f/ed461835df04d256b0070ea6b4a263e06987a60724744f958aaa205cd37b/camel-converter-1.0.6.tar.gz", hash = "sha256:e70c1f8b83b9c172270a6cd92f6cdcd8e30502923058fec07be71fb701e6ce95"},
 ]
 "certifi 2022.6.15" = [
     {url = "https://files.pythonhosted.org/packages/cc/85/319a8a684e8ac6d87a1193090e06b6bbb302717496380e225ee10487c888/certifi-2022.6.15.tar.gz", hash = "sha256:84c85a9078b11105f04f3036a9482ae10e4621616db313fe045dd24743a0820d"},
@@ -1391,9 +1402,9 @@ content_hash = "sha256:5855e388fb331494bc45b597f78c00c82a8dc8573bbec0fc768385b21
     {url = "https://files.pythonhosted.org/packages/0f/98/838f4c57f7b2679eec038ad0abefd1acaeec35e635d4d7af215acd7d1bd2/matplotlib-inline-0.1.3.tar.gz", hash = "sha256:a04bfba22e0d1395479f866853ec1ee28eea1485c1d69a6faf00dc3e24ff34ee"},
     {url = "https://files.pythonhosted.org/packages/a6/2d/2230afd570c70074e80fd06857ba2bdc5f10c055bd9125665fe276fadb67/matplotlib_inline-0.1.3-py3-none-any.whl", hash = "sha256:aed605ba3b72462d64d475a21a9296f400a19c4f74a31b59103d2a99ffd5aa5c"},
 ]
-"meilisearch 0.19.2" = [
-    {url = "https://files.pythonhosted.org/packages/65/0b/cdc306597b4e006c172af8f359d604108f974e8b47e19f6b933886352959/meilisearch-0.19.2.tar.gz", hash = "sha256:319230a04894c3560a6bede8f1191ff89843a2d45bf545f086213b67965329d3"},
-    {url = "https://files.pythonhosted.org/packages/e6/ae/bc9aea357c7aa3a1898f9f4b65ca04ccc864f8f0e8cf18a4a4e31c684d28/meilisearch-0.19.2-py3-none-any.whl", hash = "sha256:0321db6a3b8b3843766236635b154911ae66153c07ab2676b64bdc96ccd40254"},
+"meilisearch 0.20.0" = [
+    {url = "https://files.pythonhosted.org/packages/5a/85/f7db12773070448c97e893613ae682a00433fd6a2c41a5d2b4e53d96e64c/meilisearch-0.20.0.tar.gz", hash = "sha256:2e80596cf1ccc594e1f4e2bd5c03028dcfb6aa8920c5745297861f39dec8b0a7"},
+    {url = "https://files.pythonhosted.org/packages/7d/b5/dbdd05f01de2ae716d941132f70c948d2a9687827303cc8fa9773a541680/meilisearch-0.20.0-py3-none-any.whl", hash = "sha256:9be0944e6d4629edb7c0f55ebda9057d110d97ce566283244f64edb8ef708329"},
 ]
 "mistune 0.8.4" = [
     {url = "https://files.pythonhosted.org/packages/09/ec/4b43dae793655b7d8a25f76119624350b4d65eb663459eb9603d7f1f0345/mistune-0.8.4-py2.py3-none-any.whl", hash = "sha256:88a1051873018da288eee8538d476dffe1262495144b33ecb586c4ab266bb8d4"},
@@ -2021,9 +2032,9 @@ content_hash = "sha256:5855e388fb331494bc45b597f78c00c82a8dc8573bbec0fc768385b21
     {url = "https://files.pythonhosted.org/packages/b9/90/9a4f8d32db76d39484f6d6f8b366b0c549767ff3e9d5ae6161caec226d06/stack_data-0.3.0.tar.gz", hash = "sha256:77bec1402dcd0987e9022326473fdbcc767304892a533ed8c29888dacb7dddbc"},
     {url = "https://files.pythonhosted.org/packages/f3/99/9e6a7eea1618eecf8767dc7970722003761403893fa978fa30be6f3846eb/stack_data-0.3.0-py3-none-any.whl", hash = "sha256:aa1d52d14d09c7a9a12bb740e6bdfffe0f5e8f4f9218d85e7c73a8c37f7ae38d"},
 ]
-"streamlit 1.12.2" = [
-    {url = "https://files.pythonhosted.org/packages/46/73/0b497b5dbf99079c7f70dab726798945390477f1fd3a6b036188e1a3b90c/streamlit-1.12.2-py2.py3-none-any.whl", hash = "sha256:c56d0775feb39116ff90a8b01ee15be27212ee50abb88943607205d26d1d9923"},
-    {url = "https://files.pythonhosted.org/packages/7d/f8/a6423beec39c05bb955b408f32175665d0665cd3a363be1be6ee55fb1892/streamlit-1.12.2.tar.gz", hash = "sha256:f0461bebd6c1b58c38f0f602ee9bb6699f66dfe14fd2e05abc25ebe96ff4ba21"},
+"streamlit 1.13.0" = [
+    {url = "https://files.pythonhosted.org/packages/62/9c/0467dea0a064a998f94c33d03988f33efc744de1a2a550b56b38910cafa2/streamlit-1.13.0-py2.py3-none-any.whl", hash = "sha256:3231a6f424f8a7f365dc9e46d4fbb66a3634fd570c74769b8a69f792d9285d3a"},
+    {url = "https://files.pythonhosted.org/packages/e8/9c/4ac650f05d8cb5014badfa8dfddcc2b76c5306a3bb2c76cb4f3d1f730241/streamlit-1.13.0.tar.gz", hash = "sha256:eb178dc87d9f01e2be11ee9e4d55f79a678597ece56cacbfe5a9236d768d48da"},
 ]
 "structlog 22.1.0" = [
     {url = "https://files.pythonhosted.org/packages/2b/d4/359d0313ba3e7080cc943b515640b9e301f51abf196008c83c765d939df5/structlog-22.1.0.tar.gz", hash = "sha256:94b29b1d62b2659db154f67a9379ec1770183933d6115d21f21aa25cfc9a7393"},
