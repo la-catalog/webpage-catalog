@@ -7,10 +7,10 @@ authors = [
     {name = "thiagola92", email = "thiagola92@gmail.com"},
 ]
 dependencies = [
-    "streamlit>=1.11.0",
-    "la-stopwatch>=0.0.8",
-    "meilisearch>=0.19.0",
-    "structlog>=22.1.0",
+    "streamlit==1.13.0",
+    "la-stopwatch==0.0.9",
+    "meilisearch==0.20.0",
+    "structlog==22.1.0",
     "page-infra @ git+https://github.com/la-catalog/page-infra.git",
     "page-models @ git+https://github.com/la-catalog/page-models.git",
     "webpage-components @ git+https://github.com/la-catalog/webpage-components.git",
@@ -19,6 +19,7 @@ dependencies = [
 [project.urls]
 repository = "https://github.com/la-catalog/python-deployment"
 
+[project.optional-dependencies]
 [tool.pdm]
 
 [tool.pdm.scripts]
@@ -28,8 +29,8 @@ isort = "python -m isort -v --ac ."
 
 [tool.pdm.dev-dependencies]
 lint = [
-    "black",
-    "isort"
+    "black==22.8.0",
+    "isort==5.10.1",
 ]
 
 [build-system]
