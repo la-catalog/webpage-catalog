@@ -1046,7 +1046,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "4.0"
-content_hash = "sha256:d69197aaf4c4861ea26d54bd0498d2e6b456c7d738536bb827c724323e25f746"
+content_hash = "sha256:91aa6be644b6d88556c5333ad82f6367c83a2ae9d8addd77759c458131e69576"
 
 [metadata.files]
 "aio-pika 8.2.2" = [
