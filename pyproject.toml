@@ -9,7 +9,7 @@ authors = [
 dependencies = [
     "streamlit==1.13.0",
     "la-stopwatch==0.0.9",
-    "meilisearch==0.20.0",
+    "meilisearch==0.22.1",
     "structlog==22.1.0",
     "page-infra @ git+https://github.com/la-catalog/page-infra.git",
     "page-models @ git+https://github.com/la-catalog/page-models.git",
