@@ -545,7 +545,7 @@ name = "page-infra"
 version = "0.1.0"
 requires_python = ">=3.10"
 git = "https://github.com/la-catalog/page-infra.git"
-revision = "de37a26cec11a8389adf1d3800fe416ca393b0ff"
+revision = "47365f7e2ab6e26f7533a0f2c6439d5c5c1f9b67"
 summary = ""
 dependencies = [
     "aio-pika==8.2.4",
@@ -562,7 +562,7 @@ name = "page-models"
 version = "0.1.0"
 requires_python = ">=3.10"
 git = "https://github.com/la-catalog/page-models.git"
-revision = "18efe8ee9d6d3b15f1764572ec4f536847c34dfb"
+revision = "c4f98600661d51f140ca5a8a0c7b5f29626cd5e1"
 summary = ""
 dependencies = [
     "gtin==1.3.1649173518",
@@ -1007,7 +1007,7 @@ name = "webpage-components"
 version = "0.1.0"
 requires_python = ">=3.10"
 git = "https://github.com/la-catalog/webpage-components.git"
-revision = "850ef8013d66662b5541fd52983bf3962dab0d09"
+revision = "5030267e673eda85fb06dc628b40baddecbe1d5f"
 summary = ""
 dependencies = [
     "streamlit==1.13.0",
